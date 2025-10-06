@@ -1,0 +1,26 @@
+model_name: mistralai/Mistral-7B-Instruct-v0.2
+quantization:
+  bits:
+    - 16
+    - 8
+    - 4
+  backend: bitsandbytes
+  compute_dtype: bfloat16
+batch_sizes:
+  - 1
+  - 2
+  - 4
+  - 8
+max_new_tokens: 128
+prompt: |
+  You are an assistant that answers concisely. Explain the concept of transformers in deep learning.
+caching:
+  enabled: true
+  engine: vllm
+metrics:
+  latency_quantiles:
+    - 0.5
+    - 0.95
+  throughput: true
+  memory: true
+output_dir: results/inference

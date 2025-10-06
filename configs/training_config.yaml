@@ -1,0 +1,38 @@
+seed: 42
+output_dir: outputs/mistral_lora
+logging_dir: logs
+num_train_epochs: 3
+per_device_train_batch_size: 2
+per_device_eval_batch_size: 2
+gradient_accumulation_steps: 8
+learning_rate: 2.0e-4
+weight_decay: 0.01
+warmup_ratio: 0.03
+lr_scheduler_type: cosine
+max_grad_norm: 0.3
+bf16: true
+gradient_checkpointing: true
+evaluation_strategy: steps
+eval_steps: 100
+save_strategy: steps
+save_steps: 100
+save_total_limit: 3
+logging_steps: 10
+push_to_hub: false
+report_to:
+  - tensorboard
+  - wandb
+dataset:
+  path: data/sample_dataset.json
+  split: train
+  text_field: output
+  instruction_field: instruction
+  input_field: input
+  max_samples: 512
+validation:
+  path: data/sample_dataset.json
+  split: validation
+accelerate_config:
+  mixed_precision: bf16
+  num_processes: 1
+  use_fsdp: false

@@ -1,0 +1,19 @@
+model_name: mistralai/Mistral-7B-Instruct-v0.2
+revision: main
+dtype: bfloat16
+trust_remote_code: false
+use_flash_attention: true
+tokenizer_name: null
+gradient_checkpointing: true
+rope_scaling:
+  type: dynamic
+  factor: 1.5
+peft:
+  target_modules:
+    - q_proj
+    - k_proj
+    - v_proj
+    - o_proj
+  r: 16
+  lora_alpha: 32
+  lora_dropout: 0.05
