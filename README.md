@@ -12,40 +12,48 @@ LLM Efficiency Lab is a research-grade toolkit for exploring trade-offs between 
 
 ```mermaid
 flowchart LR
-    subgraph Data & Config
-        A[Configs/model_config.yaml]
-        B[Configs/training_config.yaml]
-        C[Data/sample_dataset.json]
+    subgraph "Data & Config"
+        A["configs/model_config.yaml"]
+        B["configs/training_config.yaml"]
+        C["data/sample_dataset.json"]
     end
 
     subgraph Training
-        D[trainer_base.py]
-        E[lora_finetune.py]
-        F[qlora_finetune.py]
-        G[full_finetune.py]
+        D["trainer_base.py"]
+        E["lora_finetune.py"]
+        F["qlora_finetune.py"]
+        G["full_finetune.py"]
     end
 
     subgraph Inference
-        H[quantization_benchmark.py]
-        I[batching_optimizer.py]
-        J[latency_profiler.py]
+        H["quantization_benchmark.py"]
+        I["batching_optimizer.py"]
+        J["latency_profiler.py"]
     end
 
-    subgraph Analysis & Reporting
-        K[cost_vs_accuracy.py]
-        L[memory_tracker.py]
-        M[dashboard.py (Streamlit)]
-        N[notebooks/*.ipynb]
-        O[plots/example_memory_vs_accuracy.png]
+    subgraph "Analysis & Reporting"
+        K["cost_vs_accuracy.py"]
+        L["memory_tracker.py"]
+        M["dashboard.py (Streamlit)"]
+        N["notebooks/*.ipynb"]
+        O["plots/example_memory_vs_accuracy.png"]
     end
 
     A --> D
     B --> D
     C --> D
-    D --> E & F & G
-    E & F & G --> K
-    H & I & J --> K
+    D --> E
+    D --> F
+    D --> G
+    E --> K
+    F --> K
+    G --> K
+    H --> K
+    I --> K
+    J --> K
     K --> M
+    K --> N
+    K --> O
     H --> O
     I --> O
     J --> M
